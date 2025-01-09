@@ -3,7 +3,9 @@ import tkinter as tki
 
 class kalkulator:
     def __init__(self):
-        self.field_text = ""  
+        self.field_text = "" 
+        self.current_format="dec" 
+        self.current_length="qword"
 
     def add_to_field(self, number, field):
         
@@ -74,32 +76,149 @@ class kalkulator:
         
         
     def convertTo(self, option):
-        
+        # w samych funkcjach konwertowania robimy ro różnie w zależności od aktualnego systemu używanego do wyświetlania
         if option == "bin":
             self.convertBinary()
+            self.current_format="bin"
             
         elif option == "dec":
-            self.convertDecimal() 
+            self.convertDecimal()
+            self.current_format="dec" 
              
         elif option == "oct":
             self.convertOctagonal()
+            self.current_format="oct"
             
         else:
-            self.convertHexagonal()          
+            self.convertHexagonal() 
+            self.current_format="hex"         
             
             
     def convertBinary(self):
-        return 
+        if self.current_format == "dec":
+            numTemp=int(self.field_text)
+            result=bin(numTemp)
+        elif self.current_format == "oct":
+            numTemp=int(self.field_text,8)
+            result=bin(numTemp)
+        elif self.current_format == "hex":
+            numTemp=int(self.field_text,16)
+            result=bin(numTemp)
+        else:
+            result=self.field_text
+        return result
     
     def convertDecimal(self):
-        return    
+        if self.current_format == "bin":
+            numTemp=int(self.field_text)
+            result=numTemp
+        elif self.current_format == "oct":
+            numTemp=int(self.field_text,8)
+            result=numTemp
+        elif self.current_format == "hex":
+            numTemp=int(self.field_text,16)
+            result=numTemp
+        else:
+            result=self.field_text
+        return result
     
     def convertOctagonal(self):
-        return
+        if self.current_format == "dec":
+            numTemp=int(self.field_text)
+            result=oct(numTemp)
+        elif self.current_format == "bin":
+            numTemp=int(self.field_text,)
+            result=oct(numTemp)
+        elif self.current_format == "hex":
+            numTemp=int(self.field_text,16)
+            result=oct(numTemp)
+        else:
+            result=self.field_text
+        return result
     
     def convertHexagonal(self):
-        return
+        if self.current_format == "dec":
+            numTemp=int(self.field_text)
+            result=hex(numTemp)
+        elif self.current_format == "oct":
+            numTemp=int(self.field_text,8)
+            result=hex(numTemp)
+        elif self.current_format == "bin":
+            numTemp=int(self.field_text)
+            result=hex(numTemp)
+        else:
+            result=self.field_text
+        return result
         
+    def currentBinary(self):  #funckja do wyświetlacza liczby w formacie binarnym żebyśmy gdzieś mieli
+        if self.current_format == "dec":
+            numTemp=int(self.field_text)
+            result=bin(numTemp)
+        elif self.current_format == "oct":
+            numTemp=int(self.field_text,8)
+            result=bin(numTemp)
+        elif self.current_format == "hex":
+            numTemp=int(self.field_text,16)
+            result=bin(numTemp)
+        else:
+            result=self.field_text
+        return result
+    
+    def lengthTo(self,option):
+        # w funkcjach do ustalania długości robimy to różnie w zależności od aktualnej długości 
+        if option=="qword":
+            self.toQword()
+            self.current_length="qword"
+        elif option=="dword":
+            self.toDword() 
+            self.current_length="dword"
+        elif option=="word":
+            self.toWord()
+            self.current_length="word"
+        elif option=="bajt":
+            self.toBajt()
+            self.current_length="bajt"
+
+
+    def toQword(self):
+        numTemp=self.currentBinary()
+        if len(numTemp) == 32:
+            helperString=32*"0"
+            result=helperString.join(numTemp)
+        elif len(numTemp) == 16:
+            helperString=48*"0"
+            result=helperString.join(numTemp)
+        elif len(numTemp) == 8:
+            helperString=58*"0"
+            result=helperString.join(numTemp)
+        return result
+    
+    def toDword(self):
+        numTemp=self.currentBinary()
+        if len(numTemp) == 64:
+            result=numTemp[-32:]
+        elif len(numTemp) == 16:
+            helperString=16*"0"
+            result=helperString.join(numTemp)
+        elif len(numTemp) == 8:
+            helperString=24*"0"
+            result=helperString.join(numTemp)
+        return result
+    
+    def toWord(self):
+        numTemp=self.currentBinary()
+        if len(numTemp) > 16:
+            result=numTemp[-16:]
+        elif len(numTemp) == 8:
+            helperString=24*"0"
+            result=helperString.join(numTemp)
+        return result
+    
+    def toBajt(self):
+        numTemp=self.currentBinary()
+        result = numTemp[-8:]    
+        return result
+    
                   
 
 
