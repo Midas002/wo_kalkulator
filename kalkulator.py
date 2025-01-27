@@ -4,9 +4,10 @@ from tkinter import *
 class kalkulator:
     def __init__(self):
         self.field_text = "" 
-        #self.current_format 
+        self.current_format = "decimal"
         self.current_length="qword"
         self.formats = {"binary","oktagonal", "decimal", "hexagonal"}
+        
         
 
     def add_to_field(self, number, field):
@@ -42,13 +43,15 @@ class kalkulator:
         field.grid(row=1, column=1, columnspan=4)
         field.tag_configure("right", justify="right")  
         field.insert("1.0", "0")  
-        #lb = Listbox(self.window, selectmode=MULTIPLE, height=len(self.formats), width=50)
         
-        for x in self.formats: 
-        # lb.insert(END, x)
-        # lb.grid(row=1, column=5)
-            self.onselect()
-        # lb.bind('<<ListboxSelect>>')
+        
+        self.format_container = tki.Frame(self.window)
+        self.format_container.grid(row=5,column=6, columnspan=3)
+        
+      
+        
+        self.onselect()
+        
 
         print(self.formats)
 
@@ -83,16 +86,14 @@ class kalkulator:
     
     def onselect(self):
         self.current_format=StringVar()
-        # Note here that Tkinter passes an event object to onselect()
-        #w = evt.widget
         x=0
-        #index = int(w.curselection()[0])
-        #value = w.get(index)
-       # print ('You selected item %d: "%s"' % (index, value))
         
         for item in self.formats:
-            checkboxes = Radiobutton(self.window, text=item, variable=self.current_format, value=item)
             
+            
+            checkboxes = Radiobutton(self.format_container, text=item, variable=self.current_format, value=item)
+            if item == "decimal":
+                checkboxes.select()
             checkboxes.place(x=350,y=0+x)
             x+=20
         
