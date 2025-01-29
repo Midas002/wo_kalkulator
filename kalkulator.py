@@ -55,6 +55,8 @@ class kalkulator:
 
         print(self.formats)
 
+        btn_A = tki.Button(self.window, text="A", command=lambda: self.add_to_field(10, field))
+        btn_A.grid(row=2, column=1)
        
         btn_1 = tki.Button(self.window, text="1", command=lambda: self.add_to_field(1, field))
         btn_1.grid(row=2, column=1)
@@ -73,12 +75,35 @@ class kalkulator:
 
         btn_6 = tki.Button(self.window, text="6", command=lambda: self.add_to_field(6, field))
         btn_6.grid(row=3, column=3)
+        
+        btn_7 = tki.Button(self.window, text="7", command=lambda: self.add_to_field(7, field))
+        btn_7.grid(row=4, column=1)
+
+        btn_8 = tki.Button(self.window, text="8", command=lambda: self.add_to_field(8, field))
+        btn_8.grid(row=4, column=2)
+
+        btn_9 = tki.Button(self.window, text="9", command=lambda: self.add_to_field(9, field))
+        btn_9.grid(row=4, column=3)
+        
+        btn_0 = tki.Button(self.window, text="0", command=lambda: self.add_to_field(0, field))
+        btn_0.grid(row=5, column=1)
+        
+        btn_substract = tki.Button(self.window, text="-", command=lambda: self.add_to_field(field))
+        btn_substract.grid(row=5, column=2)
+        
+        btn_coma = tki.Button(self.window, text=",", command=lambda: self.add_to_field(field))
+        btn_coma.grid(row=5, column=3)
+        
+        btn_add = tki.Button(self.window, text="+", command=lambda: self.add_to_field(field))
+        btn_add.grid(row=5, column=4)
+        
+        
 
         btn_clear = tki.Button(self.window, text="C", command=lambda: self.clear(field))
-        btn_clear.grid(row=4, column=1)
+        btn_clear.grid(row=6, column=1)
 
         btn_equals = tki.Button(self.window, text="=", command=lambda: self.calculate(field))
-        btn_equals.grid(row=4, column=2)
+        btn_equals.grid(row=6, column=2)
 
         field.bind("<<Modified>>", lambda event: self.align_text_right(field))
         
@@ -94,7 +119,7 @@ class kalkulator:
             checkboxes = Radiobutton(self.format_container, text=item, variable=self.current_format, value=item)
             if item == "decimal":
                 checkboxes.select()
-            checkboxes.place(x=350,y=0+x)
+            checkboxes.place(x=250,y=0+x)
             x+=20
         
         
