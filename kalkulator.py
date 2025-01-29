@@ -122,11 +122,7 @@ class kalkulator:
             checkboxes.place(x=250,y=0+x)
             x+=20
         
-        
-
-        
-                
-        
+    
 
     def align_text_right(self, field):
         field.tag_add("right", "1.0", "end")  
@@ -153,15 +149,9 @@ class kalkulator:
             
             
     def convertBinary(self):
-        if self.current_format == "dec":
-            numTemp=int(self.field_text)
-            result=bin(numTemp)
-        elif self.current_format == "oct":
-            numTemp=int(self.field_text,8)
-            result=bin(numTemp)
-        elif self.current_format == "hex":
-            numTemp=int(self.field_text,16)
-            result=bin(numTemp)
+        temp=self.convertDecimal()
+        if self.current_format != "bin":
+            result=bin(temp)
         else:
             result=self.field_text
         return result
@@ -181,29 +171,17 @@ class kalkulator:
         return result
     
     def convertOctagonal(self):
-        if self.current_format == "dec":
-            numTemp=int(self.field_text)
-            result=oct(numTemp)
-        elif self.current_format == "bin":
-            numTemp=int(self.field_text,)
-            result=oct(numTemp)
-        elif self.current_format == "hex":
-            numTemp=int(self.field_text,16)
-            result=oct(numTemp)
+        temp=self.convertDecimal()
+        if self.current_format != "oct":
+            result=oct(temp)
         else:
             result=self.field_text
         return result
     
     def convertHexagonal(self):
-        if self.current_format == "dec":
-            numTemp=int(self.field_text)
-            result=hex(numTemp)
-        elif self.current_format == "oct":
-            numTemp=int(self.field_text,8)
-            result=hex(numTemp)
-        elif self.current_format == "bin":
-            numTemp=int(self.field_text)
-            result=hex(numTemp)
+        temp=self.convertDecimal()
+        if self.current_format != "hex":
+            result=
         else:
             result=self.field_text
         return result
